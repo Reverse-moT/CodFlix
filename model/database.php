@@ -4,12 +4,11 @@
 * ----- INIT DATABASE CONNECTION -----
 *************************************/
 
-
 function init_db() {
-  try { 
+  try {
 
     $host     = 'localhost';
-    $dbname   = 'Codflix';
+    $dbname   = 'codflix';
     $charset  = 'utf8';
     $user     = 'codflix';
     $password = 'codflix';

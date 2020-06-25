@@ -1,8 +1,7 @@
 <?php
-
 session_start();
-
 require_once( 'model/user.php' );
+
 
 /****************************
 * ----- LOAD LOGIN PAGE -----
@@ -56,6 +55,5 @@ function login( $post ) {
 function logout() {
   $_SESSION = array();
   session_destroy();
-
   header( 'location: index.php' );
 }

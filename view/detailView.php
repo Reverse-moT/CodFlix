@@ -12,7 +12,6 @@
     </div>
 <?php } else { ?>
 
-
     <!-- MEDIA INFO -->
     <div>
         <p><?php echo ($detail[0]['title']) ?></p>
@@ -37,7 +36,6 @@ if ($detail[0]['type'] == 'série' && !isset($detailEpisode)) { ?>
         if ($season_id == null) {
 
             echo ('<option selected value="index.php?media=' . $detail[0]["id"] . '">Tout</option>');
-
             while ($i <= $nbSeason) {
                 echo ('<option value="index.php?media=' . $detail[0]["id"] . '&season=' . $i . '">Saison ' . $i . '</option>');
                 $i++;
