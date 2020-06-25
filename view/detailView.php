@@ -14,11 +14,14 @@
 
     <!-- MEDIA INFO -->
     <div>
-        <p><?php echo ($detail[0]['title']) ?></p>
-        <p><?php echo ($detail[0]['type']) ?></p>
-        <p><?php echo ($detail[0]['status']) ?></p>
-        <p><?php echo ($detail[0]['release_date']) ?></p>
-        <p><?php echo ($detail[0]['summary']) ?></p>
+        <h3><?php echo ($detail[0]['title']) ?></h3>
+        <p> - <?php echo ($detail[0]['type']) ?></p>
+        <p> - <?php echo ($detail[0]['status']) ?></p>
+        <p> - <?php echo ($detail[0]['release_date']) ?></p>
+        <p> " <?php echo ($detail[0]['summary']) ?> "</p>
+        <div class="video">
+            <iframe allowfullscreen="" frameborder="0" src="<?= $detail[0]['trailer_url']; ?>"></iframe>
+        </div>
     </div>
 
 

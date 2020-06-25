@@ -123,8 +123,43 @@ class User
     return $req->fetch();
   }
 
+  /******************************
+   * ------- DELETE USER  -------
+   ******************************/
 
-  // Get history of user_id
+
+  public static function deleteUser($password, $old_password)
+  {
+    $user     = new stdClass();
+    $user->id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+
+    $db   = init_db();
+    $req  = $db->prepare("SELECT password FROM user WHERE id = $user->id");
+    $req->execute();
+    $current_password = $req->fetch();
+
+    if ($old_password == $current_password[0]) {
+      $req  = $db->prepare("DELETE FROM user WHERE id = $user->id ");
+      $req->execute();
+
+      $req  = $db->prepare("DELETE FROM history WHERE user_id = $user->id ");
+      $req->execute();
+
+      $reponse = 'OK';
+      session_destroy();
+    } else {
+      $reponse = 'Ancien mot de passe incorrect';
+    }
+
+    $db   = null;
+    return $reponse;
+  }
+
+  /*********************************
+   * ------- GET USER HISTORY -------
+   *********************************/
+
+
   public static function getHistory($user_id)
   {
     $db   = init_db();
@@ -137,10 +172,13 @@ class User
   }
 
 
-  // Update History
-  public static function addHistory($id, $user_id)
-  {
+  /*******************************
+   * ------- UPDATE HISTORY -------
+   ********************************/
 
+
+  public static function updateHistory($id, $user_id)
+  {
     $db   = init_db();
 
     $req  = $db->prepare("SELECT * FROM history WHERE media_id = " . $id . " AND user_id = " . $user_id);
@@ -161,7 +199,11 @@ class User
   }
 
 
-  // Delete media from history
+  /***************************************
+   * ------- DELETE ONE FROM HISTORY -----
+   **************************************/
+
+
   public static function deleteMediaFromHistory($history)
   {
     $user     = new stdClass();
@@ -180,5 +222,44 @@ class User
 
     $db   = null;
     return $req->fetchAll();
+  }
+
+
+  /***********************************
+   * ------- UPDATE ACCOUNT INFO -----
+   ***********************************/
+
+  public static function UpdateAcountInfo($mail, $password, $old_password)
+  {
+
+    $user     = new stdClass();
+    $user->id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+
+    $db   = init_db();
+    $req  = $db->prepare("SELECT password FROM user WHERE id = $user->id");
+    $req->execute();
+    $current_password = $req->fetch();
+
+    if ($mail !== null) {
+
+      $req  = $db->prepare("UPDATE user SET email = '$mail' WHERE id = $user->id ");
+      $req->execute();
+      $reponse = 'Mail modifié';
+    }
+
+    if ($password !== null) {
+      if ($old_password == $current_password[0]) {
+
+        $reponse = 'Nouveau mot de passe modifié avec succès';
+        $cryptedPassword = crypt($password, 'SHA-256');
+        $req  = $db->prepare("UPDATE user SET password = '$cryptedPassword' WHERE id = $user->id");
+        $req->execute();
+      } else {
+        $reponse = 'Ancien mot de passe incorrect';
+      }
+    }
+
+    $db   = null;
+    return $reponse;
   }
 }

@@ -23,14 +23,13 @@ function signupPage() {
 * ----- SIGNUP FUNCTION -----
 ***************************/
 
-function IsSignupFormOk($post ) {
+function IsSignupFormOk( $post ) {
 
-  $data = new stdClass();
-  
-  $data->email = $post['email'];
-  $data->password = $post['password'];
-  $data->password_confirm = $post['password_confirm'];
+  $formData = new stdClass();
+  $formData->email = $post['email'];
+  $formData->password = $post['password'];
+  $formData->password_confirm = $post['password_confirm'];
 
-  $user           = new User( $data );
-  $userData       = $user-> createUser();
+  $user           = new User( $formData );
+  $userformData       = $user-> createUser();
 }

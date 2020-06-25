@@ -1,9 +1,13 @@
 <?php ob_start(); ?>
 
 <div>
+
+    <h2> Contactez - nous</h2>
+
     <a href='mailto:contact@codflix.com'>
-        <P>Contactez-nous!</P>
+        <P>Envoyer un mail</P>
     </a>
+
 </div>
 
 <?php

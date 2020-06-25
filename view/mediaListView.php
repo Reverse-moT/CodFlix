@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="row">
-    <div class="col-md-4 offset-md-8">
+    <div class="col-md-6 offset-md-6">
         <form method="get">
             <div class="form-group has-btn">
                 <input type="search" id="search" name="title" value="<?= $search; ?>" class="form-control"
