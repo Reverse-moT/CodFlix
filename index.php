@@ -34,6 +34,9 @@ if ( isset( $_GET['action'] ) ):
 
   endswitch;
 
+elseif ( isset( $_GET['media'] ) ):
+  mediaDetailPage();
+
 else:
 
   $user_id = isset( $_SESSION['user_id'] ) ? $_SESSION['user_id'] : false;

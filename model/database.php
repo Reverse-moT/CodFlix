@@ -4,14 +4,15 @@
 * ----- INIT DATABASE CONNECTION -----
 *************************************/
 
+
 function init_db() {
-  try {
+  try { 
 
     $host     = 'localhost';
-    $dbname   = 'codflix';
+    $dbname   = 'Codflix';
     $charset  = 'utf8';
-    $user     = 'root';
-    $password = '';
+    $user     = 'codflix';
+    $password = 'codflix';
 
     $db = new PDO( "mysql:host=$host;dbname=$dbname;charset=$charset", $user, $password );
 
