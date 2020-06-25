@@ -4,6 +4,10 @@ require_once( 'controller/homeController.php' );
 require_once( 'controller/loginController.php' );
 require_once( 'controller/signupController.php' );
 require_once( 'controller/mediaController.php' );
+require_once( 'controller/contactController.php' );
+require_once( 'controller/detailController.php' );
+require_once( 'controller/historyController.php' );
+
 
 /**************************
 * ----- HANDLE ACTION -----
@@ -22,6 +26,9 @@ if ( isset( $_GET['action'] ) ):
 
     case 'signup':
 
+      if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['password_confirm']) ){
+        IsSignupFormOk($_POST);
+      }
       signupPage();
 
     break;
@@ -32,10 +39,23 @@ if ( isset( $_GET['action'] ) ):
 
     break;
 
+    case 'history':
+
+      history();
+
+    break;
+
+    case 'contact':
+
+      contact();
+
+    break;
+
   endswitch;
 
 elseif ( isset( $_GET['media'] ) ):
-  mediaDetailPage();
+
+  detail();
 
 else:
 
